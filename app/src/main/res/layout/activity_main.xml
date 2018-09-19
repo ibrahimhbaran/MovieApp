@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.dex.movieapp.view.adapter.MoviesAdapter" />
+
+        <variable
+            name="layoutManager"
+            type="android.support.v7.widget.GridLayoutManager" />
+
+        <variable
+            name="dividerItemDecoration"
+            type="com.dex.movieapp.utils.ItemDecorator" />
+
+
+        <variable
+            name="searchViewModel"
+            type="com.dex.movieapp.viewmodels.SearchViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/search_box"
+                style="@android:style/Widget.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="search"
+                android:text="@={searchViewModel.searchTerm}" />
+
+
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_bar"
+            android:layout_marginTop="10dp"
+            app:adapter="@{adapter}"
+            app:dividerItemDecoration="@{dividerItemDecoration}"
+            app:layoutManager="@{layoutManager}" />
+
+    </RelativeLayout>
+</layout>
