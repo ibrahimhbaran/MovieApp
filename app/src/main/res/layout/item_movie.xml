@@ -5,6 +5,9 @@
     <data>
 
         <variable
+            name="BASE_IMAGE_URL"
+            type="String"/>
+        <variable
             name="movie"
             type="com.dex.movieapp.data.entities.Movie" />
     </data>
@@ -29,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:text="@{movie.genre + movie.year}" />
+                    android:text="@{movie.year}" />
 
                 <ImageView
                     android:id="@+id/movie_poster"
@@ -38,7 +41,7 @@
                     android:layout_below="@+id/movie_genre_year"
                     android:layout_centerHorizontal="true"
                     android:scaleType="fitXY"
-                    app:imgUrl="@{movie.poster}" />
+                    app:imgUrl="@{BASE_IMAGE_URL+movie.poster}" />
 
                 <TextView
                     android:id="@+id/movie_title"

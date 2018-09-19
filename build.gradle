@@ -7,7 +7,8 @@ ext {
     retrofitVersion = '2.4.0'
     gsonVersion = '2.8.5'
     daggerVersion = '2.5'
-    glideVersion = '4.6.1'
+    glideVersion = '4.7.1'
+    glideCompilerVersion ='4.8.0'
 }
 
 buildscript {

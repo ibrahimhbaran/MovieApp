@@ -2,6 +2,7 @@ package com.dex.movieapp.data.source.remote
 
 
 import com.dex.movieapp.data.models.MovieList
+import com.dex.movieapp.utils.API_KEY
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,6 +11,6 @@ import retrofit2.http.GET
  */
 interface MoviesService{
 
-    @GET("/api/movies")
+    @GET("movie/popular?api_key=$API_KEY")
     fun getMovies(): Call<MovieList>
 }

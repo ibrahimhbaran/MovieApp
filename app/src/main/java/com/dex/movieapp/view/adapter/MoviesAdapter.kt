@@ -10,6 +10,7 @@ import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import com.dex.movieapp.data.entities.Movie
 import com.dex.movieapp.databinding.ItemMovieBinding
+import com.dex.movieapp.utils.IMAGE_BASE_URL
 
 
 /**
@@ -58,6 +59,7 @@ class MoviesAdapter(private val context: Context) : RecyclerView.Adapter<MoviesA
          */
         fun bind(movie: Movie) {
             binding.movie = movie
+            binding.baseimageurl = IMAGE_BASE_URL
             binding.executePendingBindings()
         }
     }

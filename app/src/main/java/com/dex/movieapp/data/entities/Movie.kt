@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "movies",primaryKeys = ["id"])
 data class Movie(@field:SerializedName("id")  var id: Int,
                  @field:SerializedName("title") var title: String,
-                 @field:SerializedName("year") var year: String,
-                 @field:SerializedName("genre") var genre: String,
-                 @field:SerializedName("poster") var poster: String
+                 @field:SerializedName("release_date") var year: String,
+                 @field:SerializedName("poster_path") var poster: String,
+                 @field:SerializedName("overview") var overview: String
 )

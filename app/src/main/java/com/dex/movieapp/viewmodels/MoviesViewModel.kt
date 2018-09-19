@@ -24,7 +24,7 @@ class MoviesViewModel(val context: Application) : AndroidViewModel(context) {
 
                 if (searchTerm.isNotEmpty()) {
 
-                    moviesLiveData.value = movies.filter { it -> it.genre.contains(searchTerm,true) || it.title.contains(searchTerm, true) }
+                    moviesLiveData.value = movies.filter { it.title.contains(searchTerm, true) }
 
                 } else {
 
