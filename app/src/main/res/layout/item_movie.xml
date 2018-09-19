@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="BASE_IMAGE_URL"
-            type="String"/>
-        <variable
-            name="movie"
-            type="com.dex.movieapp.data.entities.Movie" />
+            name="movieModel"
+            type="com.dex.movieapp.data.models.MovieModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -32,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:text="@{movie.year}" />
+                    android:text="@{movieModel.releaseYear}" />
 
                 <ImageView
                     android:id="@+id/movie_poster"
@@ -41,14 +37,14 @@
                     android:layout_below="@+id/movie_genre_year"
                     android:layout_centerHorizontal="true"
                     android:scaleType="fitXY"
-                    app:imgUrl="@{BASE_IMAGE_URL+movie.poster}" />
+                    app:imgUrl="@{movieModel.posterPath}" />
 
                 <TextView
                     android:id="@+id/movie_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/movie_poster"
-                    android:text="@{movie.title}" />
+                    android:text="@{movieModel.title}" />
 
 
             </RelativeLayout>

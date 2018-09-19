@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 
-import com.dex.movieapp.data.entities.Movie
+import com.dex.movieapp.data.models.MovieModel
 import com.dex.movieapp.data.source.MoviesDataSource
 import com.dex.movieapp.data.source.MoviesRepository
 
@@ -13,14 +13,14 @@ import com.dex.movieapp.data.source.MoviesRepository
 class MoviesViewModel(val context: Application) : AndroidViewModel(context) {
 
 
-    val moviesLiveData = MutableLiveData<List<Movie>>()
+    val moviesLiveData = MutableLiveData<List<MovieModel>>()
 
 
-    fun loadMovies(searchTerm: String): LiveData<List<Movie>> {
+    fun loadMovies(searchTerm: String): LiveData<List<MovieModel>> {
 
         MoviesRepository.getInstance(context).getMovies(object : MoviesDataSource.LoadMoviesCallback {
 
-            override fun onMoviesLoaded(movies: List<Movie>) {
+            override fun onMoviesLoaded(movies: List<MovieModel>) {
 
                 if (searchTerm.isNotEmpty()) {
 

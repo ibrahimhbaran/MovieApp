@@ -8,13 +8,12 @@ import com.dex.movieapp.R
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
-import com.dex.movieapp.data.entities.Movie
+import com.dex.movieapp.data.models.MovieModel
 import com.dex.movieapp.databinding.ItemMovieBinding
-import com.dex.movieapp.utils.IMAGE_BASE_URL
 
 
 /**
- * Adapter for the list of the movies
+ * Adapter for the list of the movieModels
  * @property context Context in which the application is running
  */
 class MoviesAdapter(private val context: Context) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
@@ -22,7 +21,7 @@ class MoviesAdapter(private val context: Context) : RecyclerView.Adapter<MoviesA
     /**
      * The list of posts of the adapter
      */
-    private var movies: List<Movie> = listOf()
+    private var movieModels: List<MovieModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -31,21 +30,21 @@ class MoviesAdapter(private val context: Context) : RecyclerView.Adapter<MoviesA
     }
 
     override fun onBindViewHolder(p0: MovieViewHolder, position: Int) {
-        p0.bind(movies[position])
+        p0.bind(movieModels[position])
     }
 
 
     override fun getItemCount(): Int {
-        return movies.size
+        return movieModels.size
     }
 
 
     /**
-     * Updates the list of movies of the adapter
-     * @param movies the new list of movies of the adapter
+     * Updates the list of movieModels of the adapter
+     * @param movieModels the new list of movieModels of the adapter
      */
-    fun updateMovies(movies: List<Movie>) {
-        this.movies = movies
+    fun updateMovies(movieModels: List<MovieModel>) {
+        this.movieModels = movieModels
         notifyDataSetChanged()
     }
 
@@ -55,11 +54,10 @@ class MoviesAdapter(private val context: Context) : RecyclerView.Adapter<MoviesA
      */
     class MovieViewHolder(private val binding: ItemMovieBinding) : RecyclerView.ViewHolder(binding.root) {
         /**
-         * Binds a movie into the view
+         * Binds a movieModel into the view
          */
-        fun bind(movie: Movie) {
-            binding.movie = movie
-            binding.baseimageurl = IMAGE_BASE_URL
+        fun bind(movieModel: MovieModel) {
+            binding.movieModel = movieModel
             binding.executePendingBindings()
         }
     }

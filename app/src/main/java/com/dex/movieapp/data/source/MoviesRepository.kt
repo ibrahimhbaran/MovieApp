@@ -2,7 +2,7 @@ package com.dex.movieapp.data.source
 
 import android.content.Context
 import android.util.Log
-import com.dex.movieapp.data.entities.Movie
+import com.dex.movieapp.data.models.MovieModel
 import com.dex.movieapp.data.source.local.MoviesDatabase
 import com.dex.movieapp.data.source.local.MoviesLocalDataSource
 import com.dex.movieapp.data.source.remote.MoviesRemoteDataSource
@@ -15,20 +15,19 @@ import com.dex.movieapp.utils.Prefs
  *
  */
 
-class MoviesRepository(context: Context) : MoviesDataSource {
+class MoviesRepository(context: Context) : MoviesDataSource() {
 
 
     private var localDataSource: MoviesLocalDataSource? = null
 
     private var remoteDataSource: MoviesRemoteDataSource? = null
 
-    private lateinit var context: Context
 
     private var prefs: Prefs? = null
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
-    var cachedMovies: LinkedHashMap<Int, Movie> = LinkedHashMap()
+    var cachedMovies: LinkedHashMap<Int, MovieModel> = LinkedHashMap()
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
@@ -60,7 +59,7 @@ class MoviesRepository(context: Context) : MoviesDataSource {
         } else {
 
             localDataSource?.getMovies(object : MoviesDataSource.LoadMoviesCallback {
-                override fun onMoviesLoaded(movies: List<Movie>) {
+                override fun onMoviesLoaded(movies: List<MovieModel>) {
 
                     callback.onMoviesLoaded(movies)
 
@@ -82,7 +81,7 @@ class MoviesRepository(context: Context) : MoviesDataSource {
     private fun getMoviesFromRemote(callback: MoviesDataSource.LoadMoviesCallback) {
 
         remoteDataSource?.getMovies(object : MoviesDataSource.LoadMoviesCallback {
-            override fun onMoviesLoaded(movies: List<Movie>) {
+            override fun onMoviesLoaded(movies: List<MovieModel>) {
                 refreshCache(movies)
                 refreshLocalDataSource(movies)
                 callback.onMoviesLoaded(ArrayList(cachedMovies.values))
@@ -97,7 +96,7 @@ class MoviesRepository(context: Context) : MoviesDataSource {
         })
     }
 
-    private fun refreshLocalDataSource(movies: List<Movie>) {
+    private fun refreshLocalDataSource(movies: List<MovieModel>) {
 
         localDataSource?.deleteAllMovies()
 
@@ -108,8 +107,6 @@ class MoviesRepository(context: Context) : MoviesDataSource {
 
     }
 
-    override fun saveMovie(movie: Movie) {
-    }
 
     override fun deleteAllMovies() {
 
@@ -117,9 +114,9 @@ class MoviesRepository(context: Context) : MoviesDataSource {
         cachedMovies.clear()
     }
 
-    private fun refreshCache(movies: List<Movie>) {
+    private fun refreshCache(movies: List<MovieModel>) {
         // set cache period for every 10 minutes to refresh it
-        prefs?.cacheTime = System.currentTimeMillis()+ CACHE_TIME_PERIOD
+        prefs?.cacheTime = System.currentTimeMillis() + CACHE_TIME_PERIOD
 
         cachedMovies.clear()
         movies.forEach {
@@ -127,7 +124,7 @@ class MoviesRepository(context: Context) : MoviesDataSource {
         }
         cacheIsDirty = false
 
-        Log.v(TAG,"app cache refreshed ")
+        Log.v(TAG, "app cache refreshed ")
     }
 
 

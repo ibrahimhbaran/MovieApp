@@ -1,6 +1,5 @@
 package com.dex.movieapp.data.source.remote
 
-import com.dex.movieapp.data.entities.Movie
 import com.dex.movieapp.data.models.MovieList
 import com.dex.movieapp.data.source.MoviesDataSource
 import retrofit2.Call
@@ -9,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-object MoviesRemoteDataSource : MoviesDataSource {
+object MoviesRemoteDataSource : MoviesDataSource() {
 
 
     /**
@@ -26,20 +25,13 @@ object MoviesRemoteDataSource : MoviesDataSource {
 
             override fun onResponse(call: Call<MovieList>?, response: Response<MovieList>?) {
 
-                callback.onMoviesLoaded(response?.body()!!.movieList)
+                callback.onMoviesLoaded(response?.body()!!.movieModelList)
             }
 
         })
 
     }
 
-    override fun saveMovie(movie: Movie) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun deleteAllMovies() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 }
 

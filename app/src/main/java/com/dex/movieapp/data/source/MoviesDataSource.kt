@@ -1,24 +1,24 @@
 package com.dex.movieapp.data.source
 
-import com.dex.movieapp.data.entities.Movie
+import com.dex.movieapp.data.models.MovieModel
 
 
-interface MoviesDataSource {
+open class  MoviesDataSource {
 
     interface LoadMoviesCallback {
 
-        fun onMoviesLoaded(movies: List<Movie>)
+        fun onMoviesLoaded(movieModels: List<MovieModel>)
 
         fun onDataNotAvailable()
 
     }
 
 
-    fun getMovies(callback: LoadMoviesCallback)
+   open fun getMovies(callback: LoadMoviesCallback){}
 
-    fun saveMovie(movie: Movie)
+   open fun saveMovie(movieModel: MovieModel){}
 
-    fun deleteAllMovies()
+   open fun deleteAllMovies(){}
 
 }
 
