@@ -18,12 +18,12 @@ import com.dex.movieapp.utils.Prefs
 class MoviesRepository(context: Context) : MoviesDataSource() {
 
 
-    private var localDataSource: MoviesLocalDataSource? = null
+    private var localDataSource: MoviesLocalDataSource
 
-    private var remoteDataSource: MoviesRemoteDataSource? = null
+    private var remoteDataSource: MoviesRemoteDataSource
 
+    private var prefs: Prefs
 
-    private var prefs: Prefs? = null
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
@@ -58,7 +58,7 @@ class MoviesRepository(context: Context) : MoviesDataSource() {
 
         } else {
 
-            localDataSource?.getMovies(object : MoviesDataSource.LoadMoviesCallback {
+            localDataSource.getMovies(object : MoviesDataSource.LoadMoviesCallback {
                 override fun onMoviesLoaded(movies: List<MovieModel>) {
 
                     callback.onMoviesLoaded(movies)
@@ -80,7 +80,7 @@ class MoviesRepository(context: Context) : MoviesDataSource() {
 
     private fun getMoviesFromRemote(callback: MoviesDataSource.LoadMoviesCallback) {
 
-        remoteDataSource?.getMovies(object : MoviesDataSource.LoadMoviesCallback {
+        remoteDataSource.getMovies(object : MoviesDataSource.LoadMoviesCallback {
             override fun onMoviesLoaded(movies: List<MovieModel>) {
                 refreshCache(movies)
                 refreshLocalDataSource(movies)
@@ -98,10 +98,10 @@ class MoviesRepository(context: Context) : MoviesDataSource() {
 
     private fun refreshLocalDataSource(movies: List<MovieModel>) {
 
-        localDataSource?.deleteAllMovies()
+        localDataSource.deleteAllMovies()
 
         for (movie in movies) {
-            localDataSource?.saveMovie(movie)
+            localDataSource.saveMovie(movie)
         }
 
 
@@ -110,13 +110,13 @@ class MoviesRepository(context: Context) : MoviesDataSource() {
 
     override fun deleteAllMovies() {
 
-        localDataSource?.deleteAllMovies()
+        localDataSource.deleteAllMovies()
         cachedMovies.clear()
     }
 
     private fun refreshCache(movies: List<MovieModel>) {
         // set cache period for every 10 minutes to refresh it
-        prefs?.cacheTime = System.currentTimeMillis() + CACHE_TIME_PERIOD
+        prefs.cacheTime = System.currentTimeMillis() + CACHE_TIME_PERIOD
 
         cachedMovies.clear()
         movies.forEach {
