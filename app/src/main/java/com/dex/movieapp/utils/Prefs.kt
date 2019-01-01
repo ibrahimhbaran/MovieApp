@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class Prefs(context: Context) {
 
-    val PREFS_FILE_NAME = "com.sky.skyqgo.prefs"
+    val PREFS_FILE_NAME = "com.dex.movieapp.prefs"
     val CACHE_TIME = "cache_time"
     val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILE_NAME, 0)
 
